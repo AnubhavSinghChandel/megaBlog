@@ -4,7 +4,11 @@ import { useSelector } from 'react-redux'
 
 function PostCard({ post }) {
     // console.log(post)
-    const userName = useSelector((state) => state.userData.name)
+    const userName = useSelector((state) => {
+        if (state.loginStatus) {
+            return state.userData.name
+        }
+    })
     // console.log(userName);
     const postDate = new Date(post.$updatedAt)
     // console.log(postDate.toDateString());

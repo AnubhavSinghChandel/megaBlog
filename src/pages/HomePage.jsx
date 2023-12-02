@@ -18,7 +18,8 @@ function HomePage() {
             .catch((e) => console.log(e))
     }, [])
 
-    const handleClick = () => navigate('/allposts')
+    const allPosts = () => navigate('/allposts')
+    const createPost = () => navigate('/createblog')
 
     if (posts.length === 0) {
         return (
@@ -27,7 +28,7 @@ function HomePage() {
     } else
         return (
             <div className='flex flex-row'>
-                <div className="grid gap-6 gap-y-10 p-10 mt-6 mb-28 align-middle md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-6 gap-y-10 p-10 mt-10 mb-28 align-middle md:grid-cols-2 lg:grid-cols-3">
                     {posts.slice(0, 6).map((post) => (
                         <div key={post.$id}>
                             <Link to={`/post/${post.$id}`}>
@@ -35,11 +36,16 @@ function HomePage() {
                             </Link>
                         </div>
                     ))}
-                    <div className='flex item-center justify-center mt-60 mb-60'>
+                    <div className='flex flex-col gap-6 item-center mx-36 justify-center mt-40 mb-60'>
                         <ButtonLarge
                             type='button'
                             label='All Posts'
-                            onClick={handleClick}
+                            onClick={allPosts}
+                        />
+                        <ButtonLarge
+                            type='button'
+                            label='Create New'
+                            onClick={createPost}
                         />
                     </div>
                 </div>

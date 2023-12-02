@@ -18,6 +18,7 @@ export default function RTE({ name, control, label, defaultValue = '' }) {
                             apiKey='en02vdpuctd9w8d2xwkyzgvyn6dkbrshgrlrf86tc1nk02d5'
                             init={{
                                 height: 500,
+                                placeholder: "Let's start with something interesting!",
                                 plugins: [
                                     "image",
                                     "advlist",
@@ -49,7 +50,7 @@ export default function RTE({ name, control, label, defaultValue = '' }) {
                                 ],
                                 ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
                             }}
-                            initialValue="Lets start with something creative!"
+                            initialValue={defaultValue}
                             onEditorChange={onChange}
                         />
                     </div>

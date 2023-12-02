@@ -11,6 +11,7 @@ import CreateBlog from './pages/CreateBlog.jsx'
 import AllPosts from './components/AllPosts.jsx'
 import AuthLayout from './components/AuthLayout.jsx'
 import Post from './pages/Post.jsx'
+import EditPost from './pages/EditPost.jsx'
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,14 @@ const router = createBrowserRouter([
         element: (
           <AuthLayout authentication>
             <Post />
+          </AuthLayout>
+        )
+      },
+      {
+        path: '/edit-post/:slug',
+        element: (
+          <AuthLayout authentication>
+            <EditPost />
           </AuthLayout>
         )
       }

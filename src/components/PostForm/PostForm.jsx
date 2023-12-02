@@ -7,41 +7,50 @@ import storageService from "../../appwrite_services/storageService"
 import databaseService from "../../appwrite_services/databaseService"
 import { BlackButton, Input, RTE } from "../index"
 
-function PostForm({ posts }) {
+function PostForm({ post }) {
 
-    const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
+    const { register, handleSubmit, watch, setValue, control, getValues, reset } = useForm({
         defaultValues: {
-            title: posts ? posts.title : '',
-            slug: posts ? posts.slug : '',
-            content: posts ? posts.content : '',
-            featuredImage: posts ? posts.featuredImage : '',
-            status: posts ? posts.status : true,
-        }
+            title: post?.title || "",
+            slug: post?.$id || "",
+            content: post?.content || "",
+            status: post?.status || true,
+        },
     })
+
+    useEffect(() => {
+        reset({
+            title: post?.title || "",
+            slug: post?.$id || "",
+            content: post?.content || "",
+            status: post?.status || true,
+        })
+    }, [post, reset])
+
 
     const navigate = useNavigate()
     const userData = useSelector((state) => state.userData)
 
     const submit = async (data) => {
-        if (posts) {
+        if (post) {
             const file = data.image[0] ? await storageService.uploadFile(data.image[0]) : null
             if (file) {
-                storageService.deleteFile(posts.featuredImage)
+                storageService.deleteFile(post.featuredImage)
             }
             const updatePost = await databaseService.updatePost(
-                posts.$id,
+                post.$id,
                 {
                     ...data,
-                    featuredImage: file ? file.$id : posts.featuredImage
+                    featuredImage: file ? file.$id : post.featuredImage
                 }
             )
             if (updatePost) {
                 navigate(`/post/${updatePost.id}`)
             }
         } else {
-            console.log(data);
+            // console.log(data);
             const file = await storageService.uploadFile(data.image[0])
-            console.log(file);
+            // console.log(file);
             if (file) {
                 const image = file.$id
                 data.featuredImage = image
@@ -82,6 +91,7 @@ function PostForm({ posts }) {
                 <Input
                     label="Title"
                     placeholder="Title"
+                    // value={post?.title}
                     className="mb-4"
                     {...register('title', { required: true })}
                 />
@@ -89,12 +99,13 @@ function PostForm({ posts }) {
                     label="Slug"
                     placeholder="Slug"
                     className="mb-4"
-                    {...register("slug", { required: true })}
-                    onChange={(e) => {
+                    // value={post?.$id}
+                    {...register('slug', { required: true })}
+                    onInput={(e) => {
                         setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                     }}
                 />
-                <RTE label="Content" name="content" control={control} defaultValue={getValues("content")} />
+                <RTE label="Content" name="content" control={control} defaultValue={getValues('content')} />
             </div>
             <div className="w-1/3 px-2">
                 <Input
@@ -102,14 +113,14 @@ function PostForm({ posts }) {
                     type="file"
                     className="mb-4"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
-                    {...register("image", { required: !posts })}
+                    {...register("image", { required: !post })}
                 />
-                {posts && (
+                {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={storageService.getFilePreview(posts.featuredImage)}
-                            alt={posts.title}
-                            className="rounded-lg"
+                            src={storageService.getFilePreview(post.featuredImage)}
+                            alt={post.title}
+                            className="rounded-lg mt-5"
                         />
                     </div>
                 )}
@@ -120,7 +131,7 @@ function PostForm({ posts }) {
                     {...register("status", { required: true })}
                 /> */}
                 <BlackButton type='submit' className="w-full">
-                    {posts ? "Update" : "Submit"}
+                    {post ? "Update" : "Submit"}
                 </BlackButton>
             </div>
         </form>
