@@ -7,7 +7,7 @@ class DatabaseService {
     database;
 
     constructor() {
-        this.database = Databases(this.client);
+        this.database = new Databases(this.client);
 
         this.client
             .setEndpoint(conf.appwriteURL)

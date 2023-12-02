@@ -7,7 +7,7 @@ class AuthService {
     account;
 
     constructor() {
-        this.account = Account(this.client);
+        this.account = new Account(this.client);
 
         this.client
             .setEndpoint(conf.appwriteURL)
@@ -27,9 +27,9 @@ class AuthService {
 
     createAccount = async ({ email, password, name }) => {
         try {
-            const userData = await this.account.create(ID.unique(), email, password, name)
-            if (userData)
-                return this.login({ email, password })
+            return await this.account.create(ID.unique(), email, password, name)
+            // if (userData)
+            //     return this.login({ email, password })
         } catch (error) {
             console.log(error);
         }

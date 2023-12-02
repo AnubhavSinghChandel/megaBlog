@@ -7,7 +7,7 @@ class StorageService {
     storage;
 
     constructor() {
-        this.storage = Storage(this.client);
+        this.storage = new Storage(this.client);
 
         this.client
             .setEndpoint(conf.appwriteURL)
