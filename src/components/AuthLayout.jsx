@@ -22,7 +22,7 @@ export default function Protected({ children, authentication = true }) {
 
 
     return loader ?
-        <div className='py-32 my-64'>
+        <div className=''>
             <Loader />
         </div>
         : <>{children}</>

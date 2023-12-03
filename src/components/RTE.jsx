@@ -41,7 +41,8 @@ export default function RTE({ name, control, label, defaultValue = '' }) {
                                     "wordcount",
                                     "anchor",
                                 ],
-                                toolbar: "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
+                                toolbar_mode: 'floating',
+                                toolbar: "undo redo | blocks | image | bold italic forecolor backcolor | subscript superscript underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
                                 tinycomments_mode: 'embedded',
                                 tinycomments_author: 'Author name',
                                 mergetags_list: [

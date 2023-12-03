@@ -43,7 +43,7 @@ function Post() {
     console.log(post);
 
     return post ? (
-        <div className='p-10 flex flex-col'>
+        <div className='lg:px-32 lg:mx-28 lg:py-20 md:px-20 md:mx-14 md:pt-10 sm:px-5 sm:mx-3 sm:pt-4 flex flex-col'>
             <div className="rounded-lg bg-gray-200 p-3">
                 <img
                     className="aspect-[3/2] w-full rounded-lg bg-gray-50 object-cover lg:aspect-auto lg:h-[400px]"
@@ -51,7 +51,7 @@ function Post() {
                 />
             </div>
             {isAuthor && (
-                <div className='flex justify-center flex-row gap-6'>
+                <div className='mt-10 flex justify-center flex-row gap-6'>
                     <BlackButton type='button' label='Update Post' onClick={() => navigate(`/edit-post/${post.$id}`)}>
                         Update Post
                     </BlackButton>
@@ -65,7 +65,7 @@ function Post() {
                 <h1 className='text-4xl font-bold my-10 '>
                     {post.title}
                 </h1>
-                <div className='text-center rounded-lg bg-gray-50 lg:h-auto mb-11'>
+                <div className='p-20 rounded-lg bg-gray-50 lg:h-auto mb-11'>
                     {parse(post.content)}
                 </div>
             </div>
