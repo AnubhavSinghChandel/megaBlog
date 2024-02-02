@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 import { BlackButton } from '../index'
 import LogoutBtn from './LogoutBtn'
 import { useDispatch } from 'react-redux'
-import authService from '../../appwrite_services/authService'
+// import authService from '../../appwrite_services/authService'
 import { login } from '../../store/authSlice'
 import { useEffect } from 'react'
+import axios from '../../api/axios'
 
 
 function Header() {
@@ -13,13 +14,15 @@ function Header() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        authService.currentUser()
-            .then((user) => {
-                if (user) {
-                    dispatch(login(user))
+        // authService.currentUser()
+        axios.get("/user/")
+            .then((res) => {
+                if (res) {
+                    dispatch(login(res.data.data))
                     // console.log(user);
                 }
             })
+            .catch((e) => console.error(e))
     }, [])
 
     const authStatus = useSelector((state) => state.loginStatus)

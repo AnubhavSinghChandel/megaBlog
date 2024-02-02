@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form';
-import authService from '../appwrite_services/authService';
+// import authService from '../appwrite_services/authService';
 import { Input, ButtonLarge } from './index';
 import { login } from '../store/authSlice'
 import { Link, useNavigate } from 'react-router-dom'
+import axios from '../api/axios';
 
 function SignupComponent() {
 
@@ -17,12 +18,19 @@ function SignupComponent() {
     const signup = async (data) => {
         setError('')
         try {
-            const userData = await authService.createAccount(data)
-            if (userData) {
-                dispatch(login(userData))
+            // const userData = await authService.createAccount(data)
+            // if (userData) {
+            // dispatch(login(userData))
+            //     navigate('/')
+            //     // console.log(userData);
+            // }
+
+            const res = await axios.post("/user/register", data)
+            if (res) {
+                dispatch(login(res.data.data))
                 navigate('/')
-                // console.log(userData);
             }
+            // console.log(data);
         } catch (error) {
             setError(error)
         }
@@ -64,9 +72,18 @@ function SignupComponent() {
                     <form onSubmit={handleSubmit(signup)}>
                         <div className="space-y-5">
                             <Input
+                                label="Username"
+                                type="text"
+                                placeholder='Enter your Username'
+                                {...register('username', {
+                                    required: true
+                                })}
+                            />
+                            <Input
                                 label="Full Name"
+                                type="text"
                                 placeholder='Enter your Full Name'
-                                {...register('name', {
+                                {...register('fullName', {
                                     required: true
                                 })}
                             />

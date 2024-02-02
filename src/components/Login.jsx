@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
-import { ArrowRight } from 'lucide-react'
+// import { ArrowRight } from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import authService from '../appwrite_services/authService'
+// import authService from '../appwrite_services/authService'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { login as authLogin } from '../store/authSlice'
 import { Input, ButtonLarge } from './index'
+import axios from "../api/axios"
+// import conf from '../conf/conf'
 
 function LoginComponent() {
 
@@ -13,16 +15,27 @@ function LoginComponent() {
     const [error, setError] = useState('')
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    // const apiLoginURl = `${conf.apiURL}/user/login`
 
     const userLogin = async (data) => {
         setError('')
+        // console.log(data);
         try {
-            const userData = await authService.login(data)
+            // const userData = await authService.login(data)
+            // if (userData) {
+            //     dispatch(authLogin(userData))
+            //     navigate('/')
+            //     console.log(userData);
+            // }
+
+            const userData = await axios.post("/user/login", data)
+            // console.log(userData.data.data);
             if (userData) {
-                dispatch(authLogin(userData))
+                dispatch(authLogin(userData.data.data))
                 navigate('/')
-                console.log(userData);
+                // console.log(userData);
             }
+
         } catch (error) {
             setError(error)
         }

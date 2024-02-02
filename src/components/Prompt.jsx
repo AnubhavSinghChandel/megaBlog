@@ -15,12 +15,20 @@ function Prompt() {
                         </p>
                     </div>
                 </div>
-                <Link to='/createblog'>
-                    <ButtonLarge
-                        label='Create Post'
-                        type='Button'
-                    />
-                </Link>
+                <div className='flex flex-col justify-center items-center gap-6'>
+                    <Link to='/createblog'>
+                        <ButtonLarge
+                            label='Create Post'
+                            type='Button'
+                        />
+                    </Link>
+                    <Link to='/allposts'>
+                        <ButtonLarge
+                            label='All Post'
+                            type='Button'
+                        />
+                    </Link>
+                </div>
             </div>
         </div>
     )
