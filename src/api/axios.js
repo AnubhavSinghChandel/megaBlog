@@ -1,6 +1,6 @@
 import axios from "axios"
 
 export default axios.create({
-    baseURL: "http://localhost:8000/api/v1/",
+    baseURL: "http://mega-blog-backend.vercel.app/",
     withCredentials: true,
 });
