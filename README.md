@@ -2,40 +2,10 @@ Readme.md file for a blog creating and posting website made with react and appwr
 
 ## How to run the project
 
-1. Clone the repository
-2. Run `npm install`
-3. Run `npm run dev` as this is a vite project
+1. Clone this repository and also <a href="https://github.com/AnubhavSinghChandel/megaBlog-Backend.git"> the backend</a>
+2. Run `npm install` on both the respos
+3. Run `npm run dev` on each folder for backend and frontend (Both will start on a different localhost port).
 4. Go to specified `localhost` to see the project running
-
-## How to use the project
-
-- Create an account on Appwrite
-- Create a new project on Appwrite
-- Create a new collection in the project
-- Create a new document in the collection
-- Add the following fields in the document
-
-```
-    1. UserId (string, required)
-    2. title (string, required)
-    3. content (string, required)
-    4. status (boolean, required)
-    5. featuredImage (string, required)
-```
-
-- Create a new platform in the project to integrate to web
-- Create a .env file in the root directory
-- Copy the ProjectID, API endpoint, bucket ID and the collection ID from the Appwrite dashboard and paste it in the .env file as follows
-
-```
-    VITE_APPWRITE_URL= "Your appwrite API endpoint"
-    VITE_APPWRITE_PROJECT_ID= "Your appwrite project ID"
-    VITE_APPWRITE_DATABASE_ID= "Your appwrite database ID"
-    VITE_APPWRITE_COLLECTION_ID= "Your appwrite collection ID"
-    VITE_APPWRITE_BUCKET_ID= "Your appwrite bucket ID"
-```
-
-- Run project with `npm run dev` to see working
 
 ## Features
 
